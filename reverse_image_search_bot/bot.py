@@ -3,9 +3,8 @@ import os
 import sys
 from threading import Thread
 
-from telegram import Bot, Update, ForceReply
-from telegram.error import TelegramError
-from telegram.ext import Application, CallbackQueryHandler, CommandHandler, filters, MessageHandler
+from telegram import Bot, Update, ForceReply, TelegramError
+from telegram.ext import Application, CallbackQueryHandler, CommandHandler, filters, MessageHandler, CallbackContext
 from telegram.constants import MessageType
 
 from queue import Queue
@@ -25,13 +24,13 @@ def has_video_or_document(update: Update) -> bool:
     return update.message.video is not None or update.message.document is not None
 
 
-def error(application: Application, context, error: TelegramError):
-    """Log all errors from the telegram bot api
+def error(application: Application, context: CallbackContext, error: TelegramError):
+    """Log all errors from the telegram bot API.
 
     Args:
         application (:obj:`telegram.Application`): Telegram Api Application Object.
-        context (:obj:`telegram.ext.CallbackContext`): Telegram Api CallbackContext Object
-        error (:obj:`telegram.error.TelegramError`): Telegram Api TelegramError Object
+        context (:obj:`telegram.ext.CallbackContext`): Telegram Api CallbackContext Object.
+        error (:obj:`telegram.error.TelegramError`): Telegram Api TelegramError Object.
     """
     logger.warning('Update "%s" caused error "%s"' % (context.update, error))
 

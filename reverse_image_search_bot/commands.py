@@ -114,7 +114,7 @@ def sticker_image_search(bot: Bot, update: Update):
 
 
 async def image_search_link(update: Update, context: CallbackContext):
-    """Send a reverse image search link for the image he sent us to the client
+    """Send a reverse image search link for the image sent to us to the client.
 
     Args:
         update (:obj:`telegram.update.Update`): Telegram Api Update Object
