@@ -235,8 +235,13 @@ async def best_match(bot: Bot, update: Update, args: list):
         )
         reply += dict_to_str(match, ignore=['website_name', 'website', 'image_url', 'thumbnail'])
 
-        image_url = match.get('image_url', None) or match.get('website', None)
-        thumbnail = match.get('image_url', None) or match.get('thumbnail', None)
+        image_url = match.get('image_url')
+        if not image_url:
+            image_url = match.get('website')
+
+        thumbnail = match.get('image_url')
+        if not thumbnail:
+            thumbnail = match.get('thumbnail')
 
         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='Open', url=image_url), ], ])
         bot.delete_message(chat_id, message.message_id)
